@@ -1,12 +1,17 @@
-# git_proj_template
+# Dynamics of PA in Citation Networks
 
 A project repo template. 
 
-## Installation
+## Description
 
-Run the following
+### Calculating Preferential Attachmnet
 
-    ./install.sh YOUR_PROJECT_REPO_FOLDER
+    calculate_PA_of_networks.ipynb
+
+### Making heatmap
+
+    .ipynb
+
 
 This script creates 
 

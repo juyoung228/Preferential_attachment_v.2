@@ -1,31 +1,36 @@
 
 # coding: utf-8
 
-# In[ ]:
 
 '''
 This .py is designed to run at Karst Server (linux)
+Becareful! it needs somewhat huge memory.
+Avoid to run on window...
+
+input: network_pair, network_pair_age
+output: PA_per_age_year_domain
+downloading_data: https://drive.google.com/drive/folders/1N6NFjpeBIp4lkoFMTHD_hZE0Pw3i4PSM?usp=sharing
 '''
 
-
-# In[1]:
 import networkx as nx
 
 def before_calculate(path):
     '''
-    This function is for building before & after graph according to the 
-    time group (1~10)
+    This function is for building before & after graph 
+    according to the time group (1~10)
     '''
     year_categories = {}
     
     after = nx.DiGraph()
     before = nx.DiGraph()
     
+    # open files in 'network_pair_age' to ensure build a network 
+    #which consists of only certain time group
+    
     f = open(path,'r')
     lines = f.readlines(0)
     for line in lines:
         pairs = line.split('\t')[0]+'\t'+line.split('\t')[1]
-        #print(pairs)
         year_categories[pairs] = None
        
     f_after = open("./13N_0403/"+(path.split("/")[2]).split("_")[0]+"_2015_N_n.txt",'r')
@@ -48,9 +53,11 @@ def before_calculate(path):
     calculate(path, before, after)
     return None
 
-# In[ ]:
 
 def calculate (path, before, after): 
+    '''
+    The fuction calculates PA value by using before & after network
+    '''
     degrees_before = {}
     pairs = {}
     x = []
@@ -71,6 +78,8 @@ def calculate (path, before, after):
         x.append(n)
         y.append(An/float(degrees_before.get(n)))
         #print(n,l/degreeF.get(n))
+    
+    # example; ./Done/1_2015_yeartxt1.txt 
     f = open('./Done'+path.split(".")[1]+path.split(".")[2]+".txt","w")
     f.write(str(x)+"\n"+str(y))
     f.close()
@@ -88,6 +97,7 @@ def get_filepaths(directory):
 	return file_paths
 
 
+#The diretory has 
 paths = get_filepaths('./Use')
 for path in paths:
 #	print(path.split(".")[1]+path.split(".")[2])
