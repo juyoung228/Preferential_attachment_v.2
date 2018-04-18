@@ -1,0 +1,3 @@
+﻿import generating_pair_files as gp
+gp.before_calculate("/gpfs/home/j/u/juyan/Karst/b/8_2015_year.txt1.txt")
+
